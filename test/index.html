@@ -1,0 +1,159 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Elements: Web Component -->
+    <script src="./web-components.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+
+    <style>
+      .kc-api-group-item {
+        font-weight: 600;
+      }
+      .ElementsTableOfContentsItem > .kc-api-group-item {
+        font-weight: normal;
+      }
+      .ElementsTableOfContentsItem.kc-api-group-node > .kc-api-group-item {
+        font-weight: bold;
+        margin-top: 10px;
+        text-transform: uppercase;
+        font-size: 14px;
+      }
+
+    </style>
+
+
+    <script>
+      
+      var customData = {
+        // Item in TopLevel must match with customServiceNodes
+        tocTopLevel: [
+          {
+            id: '/',
+            slug: '/',
+            title: 'Overview',
+            type: 'overview',
+            meta: '',
+          },
+          {
+            id: '/getting-started',
+            slug: '/getting-started',
+            title: 'Getting Started',
+            type: 'article',
+            meta: '',
+          }
+        ],
+        customServiceNodes: [
+          {
+            type: 'article',
+            uri: '/getting-started',
+            data:
+              '# Getting Started\n' +
+              '\n' +
+              'Quick guide for Developer to use this API.. .. ..\n' +
+              '\n' +
+              '## Authentication\n' +
+              '\n' +
+              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for configuring the integration, and get the API Secret token\n' +
+              '\n' +
+              '## About\n' +
+              '\n' +
+              'All about KMS Connect.',
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/appointment-scheduling',
+            data:
+              '# Appointment Scheduling\n' +
+              '\n' +
+              'Let learn about what is Appointment Scheduling\n' +
+              '\n' +
+              '## Context\n' +
+              '\n' +
+              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for understanding about the context\n' +
+              '\n' +
+              '## About\n' +
+              '\n' +
+              'All about KMS Connect.',
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/patient-history',
+            data:
+              '# Patient History\n' +
+              '\n' +
+              'Let learn about what is Patient History\n' +
+              '\n' +
+              '## Context\n' +
+              '\n' +
+              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for understanding about the context\n' +
+              '\n' +
+              '## About\n' +
+              '\n' +
+              'All about KMS Connect.',
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+        ],
+        tocGroupMapping: [
+          {
+            parent: "Appointment Scheduling",
+            childs: [
+              "Appointment", "Binary", "Communication"
+            ]
+          },
+          {
+            parent: "Patient History",
+            childs: [
+              "AllergyIntolerance", "Binary", "Condition"
+            ]
+          }
+        ],
+        tocPredefinedGroup: [
+          {
+            title: 'Appointment Scheduling',
+            items: [],
+            id: '/appointment-scheduling',
+            slug: '/appointment-scheduling',
+            type: 'article',
+            meta: '',
+          },
+          {
+            title: 'Patient History',
+            items: [],
+            id: '/patient-history',
+            slug: '/patient-history',
+            type: 'article',
+            meta: '',
+          }
+        ],
+      };
+
+      function onDocumentLoad() {
+        var apiDocs = document.createElement('elements-api');
+
+        apiDocs.setAttribute('apiDescriptionUrl', './api.json');
+        apiDocs.setAttribute('router', 'hash');
+        apiDocs.setAttribute('layout', 'sidebar');
+        apiDocs.setAttribute('customConfig', JSON.stringify(customData));
+        console.log('End Document onload')
+        document.body.appendChild(apiDocs);
+      };
+
+    </script>
+
+  </head>
+
+  <body onload="onDocumentLoad()">
+    <!-- <elements-api  id="api-docs" apiDescriptionUrl="./api.json" router="hash" layout="sidebar" /> -->
+  </body>
+</html>
