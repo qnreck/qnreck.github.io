@@ -1,36 +1,39 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Elements: Web Component -->
+    <title>KMS Connect API Document and Playground</title>
+    <!-- Embed elements Elements via Web Component -->
+<!--    <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>-->
     <script src="./web-components.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
 
+
     <style>
       .kc-api-group-item {
-        font-weight: 600;
+        /* font-weight: 600; */
       }
       .ElementsTableOfContentsItem > .kc-api-group-item {
         font-weight: normal;
       }
       .ElementsTableOfContentsItem.kc-api-group-node > .kc-api-group-item {
-        font-weight: bold;
+        font-weight: 600;
         margin-top: 10px;
         text-transform: uppercase;
         font-size: 14px;
       }
-
+      elements-api {
+        height: 100vh;
+        display: block;
+        position: relative;
+      }
     </style>
 
 
     <script>
-      
-      var customData = {
+
+var customData = {
         // Item in TopLevel must match with customServiceNodes
         tocTopLevel: [
           {
@@ -40,30 +43,60 @@
             type: 'overview',
             meta: '',
           },
+          // {
+          //   id: '/getting-started',
+          //   slug: '/getting-started',
+          //   title: 'Getting Started',
+          //   type: 'article',
+          //   meta: '',
+          // }
+        ],
+        tocLastLevel: [
           {
-            id: '/getting-started',
-            slug: '/getting-started',
-            title: 'Getting Started',
-            type: 'article',
-            meta: '',
+            title: '', // separator for the TOC
+          },
+          {
+            title: '', // separator for the TOC
           }
         ],
+        tocSchemaNode: {
+          title: 'API Schemas',
+          items: [],
+        },
         customServiceNodes: [
           {
             type: 'article',
             uri: '/getting-started',
             data:
-              '# Getting Started\n' +
-              '\n' +
-              'Quick guide for Developer to use this API.. .. ..\n' +
-              '\n' +
-              '## Authentication\n' +
-              '\n' +
-              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for configuring the integration, and get the API Secret token\n' +
-              '\n' +
-              '## About\n' +
-              '\n' +
-              'All about KMS Connect.',
+              '# Getting Started\n\nQuick guide for Developer to use this API.. .. ..\n\n' +
+              '## Authentication\n\nVisit our **[Web Portal](https://developers.dev.kms-connect.com/)** for configuring the integration, and get the API Secret token\n\n' +
+              '## About\n\nAll about KMS Connect.',
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/patient-demographics',
+            data:
+              "# Patient Demographics\n\n"
+              + "Patient Demographics covers data about individual patient or animal receiving care or involving in a wide range of health-related activities.\n\n"
+              + "## Scope and Content\n\n"
+              + "Patient Demographics almost always include the following information:\n\n"
+              + "- Patient name\n"
+              + "- Date of birth\n"
+              + "- Gender\n"
+              + "- Telecom\n"
+              + "- Address\n"
+              + "- Contact party information\n"
+              + "- Language\n"
+              + "- And the link to other Patient resources.\n"
+              + "\n"
+              + "## Usage\n\n"
+              + "The data in the Resource are focused on the demographic information necessary to support the administrative, financial, and logistic procedures.\n\n"
+              + "A Patient record is generally created and maintained by each organization providing care for a patient. A patient or animal receiving care at multiple organizations may therefore have its information present in multiple Patient Resources.\n\n"
+              + "**Example usage scenarios:**\n\n"
+              + "- Query for Patient demographic information using a Medical Record Number (MRN), which is a type of patient identifier. The MRN is identifiable by the identifier system and may be location-specific.\n"
+              + "- Query for Patient demographic information using some of the patient information such as first name, last name, birth date, and gender.",
             name: '',
             tags: 'CUSTOM_ARTICLE',
           },
@@ -71,17 +104,22 @@
             type: 'article',
             uri: '/appointment-scheduling',
             data:
-              '# Appointment Scheduling\n' +
-              '\n' +
-              'Let learn about what is Appointment Scheduling\n' +
-              '\n' +
-              '## Context\n' +
-              '\n' +
-              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for understanding about the context\n' +
-              '\n' +
-              '## About\n' +
-              '\n' +
-              'All about KMS Connect.',
+              "# Appointment Scheduling\n\n"
+              + "Appointment is a booking of a healthcare event among patient(s), practitioner(s) and/or device(s) for a specific date/time. This resource enables to schedule, update, and cancel appointments as needed on "
+              + "behalf of the patient.\n\n"
+              + "## Scope and Content\n\n"
+              + "Appointment Scheduling is almost always relevant to the following information:\n\n"
+              + "- Slot: An appointment slot for a healthcare service. A schedule can have multiple slots.\n"
+              + "- Appointment: A booking for an event for a specific date/time.\n"
+              + "- Location: The physical location where appointments are available or made. This is typically a provider’s location or a laboratory.\n"
+              + "- Organization: The organization (e.g., Hospital system) that provides the healthcare service.\n"
+              + "- Practitioner: A person that is involved in the provisioning of healthcare.\n\n"
+              + "## Usage\n\n"
+              + "Appointments are at the center of all key patient engagement touch-points and appointment scheduling, in particular, provides critical value to patients. It is also a source of high revenue leakage for providers due to no-shows, cancellations, wrong visit type, or long wait times while booking an appointment.\n"
+              + "\n**Example usage scenarios:**\n\n"
+              + "- Search for available slots and request booking appointments.\n"
+              + "- Query for appointments/slots information by Patient/Practitioner/ID and date/time.\n"
+              + "- Reschedule or cancel an appointment.",
             name: '',
             tags: 'CUSTOM_ARTICLE',
           },
@@ -89,36 +127,171 @@
             type: 'article',
             uri: '/patient-history',
             data:
-              '# Patient History\n' +
-              '\n' +
-              'Let learn about what is Patient History\n' +
-              '\n' +
-              '## Context\n' +
-              '\n' +
-              'Visit our **[Web Portal](https://developers.dev.kms-connect.com/)** for understanding about the context\n' +
-              '\n' +
-              '## About\n' +
-              '\n' +
-              'All about KMS Connect.',
+              "# Patient History\n\n"
+              + "A Patient History includes inquiries into the patient's Condition, Past Medical History, Past Surgical History, Social History, Family Member History, and the Medication history the patient is taking or may have recently stopped taking.\n\n"
+              + "## Scope and Content\n\n"
+              + "Patient History almost always includes the following information:\n\n"
+              + "- Chief Complaint, Signs and Symptoms belong to the patient's Condition.\n"
+              + "- Past Medical History is a more in-depth inquiry into the patient's medical issues which includes all diseases and illnesses currently being treated, and those which have had any residual effects on the patient's health. Past Medical History may include information about Allergy Intolerance, Surgeries, Immunizations, and results of physical exams and tests.\n"
+              + "- Past Surgical History includes all invasive Procedures the patient has undergone.\n"
+              + "- Medication History including Medication Administration records and Medication Statements ****is ****also important as patients will take more medications over time and drug-drug interactions must be avoided.\n"
+              + "- Social History belongs to the Observation, is a broad category of the patient history but may include the patient's smoking or other tobacco use, alcohol and drug history and should also include other aspects of the patient's health including spiritual, mental, relationship status, occupation, hobbies, and sexual activity or pertinent sexual habits.\n"
+              + "- Family Member History is another aspect of the patient history with potential indicators of genetic predisposition to the disease.\n\n"
+              + "## Usage\n\n"
+              + "The Patient History may primarily inform the provider of certain aspects of the patient's health which will direct care, especially avoidance of potential harm to the patient during treatment, for instance, avoiding medications to which the patient has an allergy or avoiding administering or prescribing a medication the patient has previously taken and had an adverse reaction to.\n\n"
+              + "**Example usage scenarios:**\n\n"
+              + "- Search for the patient’s all family members’ condition history.\n"
+              + "- Query for the medications that a patient has been administered.",
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/clinical-finding-result',
+            data:
+              '# Clinical Findings/Results\n\n'
+              + "A Clinical Finding represents the patient diagnosis and symptoms of the patient. It is the measurements, findings, and interpretation of diagnostic tests performed on patients, groups of patients, devices, locations, and/or specimens derived from these.\n\n"
+              + "## Scope and Content\n\n"
+              + "Clinical Findings/Results are almost always relevant to the following information:\n\n"
+              + "- Laboratory Results like blood glucose, or an estimated GFR; Imaging Study Findings like bone density or fetal measurements; and Diagnostic Test Results that can belong to Diagnostic Report and/or Observation.\n"
+              + "- Vital Signs belong to Observation and include such as body weight, heart rate, blood pressure, and temperature.\n"
+              + "- Other Physical Exam Findings.\n\n"
+              + "## Usage\n\n"
+              + "Clinical Findings/Results are ****used to support diagnosis, monitor progress, determine baselines and patterns and even capture demographic characteristics, as well as capture results of tests performed on products and substances.\n\n"
+              + "**Example usage scenarios:**\n\n"
+              + "- Query for the core characteristics of a patient finding.\n"
+              + "- Create a new record for the patient’s laboratory results.",
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/physician-orders',
+            data:
+              '# Physician Orders\n\n'
+              + "Physician Orders are the order or request for both supply of the medications, nutrition, services, and the instructions for administration of them to a patient.\n\n"
+              + "### Scope and Content\n\n"
+              + "Physician Orders almost always include the following information:\n\n"
+              + "- Medication Request covers all types of orders for medications for a patient. This includes inpatient medication orders as well as community orders.\n"
+              + "- Nutrition Order describes a request for oral diets and includes orders for total parenteral nutrition and diet/vitamin supplements.\n"
+              + "- Service Request may be used to support the order of medication-related devices.\n\n"
+              + "## Usage\n\n"
+              + "This resource is intended to be used by providers from a variety of specialties, one provider may simply order a base element, and another provider, based on the scope of practice, may use other elements to communicate additional therapeutic needs or patient preferences. \n\n"
+              + "The Physician Order is then accessed by or exchanged with a system, perhaps via intermediaries, that represents an organization (e.g., diagnostic or imaging service, surgical team, physical therapy department), that can perform the procedure. The organization receiving the service request will, after it accepts the request, update the request as the work is performed, and then finally issue a report that references the requests that it fulfilled.\n\n"
+              + "**Example usage scenarios:**\n\n"
+              + "- Create a medication, service, or nutrition request for a patient's treatment.\n"
+              + "- Query for the medication ordered for a patient.",
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/provider-directory',
+            data:
+              '# Provider Directory'
+              + "Provider Directory **plays a critical role in enabling the identification of individual providers and provider organizations, as well as their characteristics.\n\n"
+              + "## Scope and Content\n\n"
+              + "Provider Directory includes a lot of information, but at present, we are only supporting the following information:\n\n"
+              + "- Organization is a formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action. Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.\n"
+              + "- Location includes details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated. Locations may be private, public, mobile, or fixed and scale from small freezers to full hospital buildings or parking garages.\n"
+              + "- Practitioner is a person who is directly or indirectly engaged in the healthcare process and healthcare-related services as part of their formal responsibilities. Practitioners may include physicians, dentists, pharmacists, physician assistants, nurses, therapists, optometrists, paramedics, medical technicians, laboratory scientists, etc.\n\n"
+              + "### Usage\n\n"
+              + "Provider Directory is used to enable individuals and consumers to find contact and other accessibility information for individual healthcare providers and/or healthcare organizations.\n\n"
+              + "**Example usage scenarios:**\n\n"
+              + "- Use search parameters to filter providers by specialty and/or location.\n"
+              + "- Discover what specialties a local hospital provides.\n"
+              + "- Lookup for a provider's office hours and location.\n"
+              + "- Determine whether or not a provider is accepting new patients.",
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/others-groups',
+            data:
+              '# Others\n\n'
+              + "These resources are not classified in the above use cases, which now contain:\n\n"
+              + "- Communication is a record of a communication event if it is planned or has failed, is a conveyance of information from one entity, a sender, to another entity, a receiver. The sender and receivers may be patients, practitioners, related persons, organizations, or devices. Communication example scenarios:\n"
+              + "    - Create a reminder or alert that is delivered to a responsible provider.\n"
+              + "    - Query the patient educational material sent by a provider to a patient.\n"
+              + "- Binary is a resource that represents the data of a single raw artifact as digital content accessible in its native format. Binary example scenario:\n"
+              + "    - Query images or documents of a patient.\n"
+              + "- Document Reference is used to describe some other document, index a document, clinical note, and other binary objects so that the document can be discovered and managed.\n"
+              + "    - Create a reference for a patient document and send it to the related providers to discover.",
+            name: '',
+            tags: 'CUSTOM_ARTICLE',
+          },
+          {
+            type: 'article',
+            uri: '/hl7v2',
+            data:
+              '# HL7 Integration\n\nLet learn about what is HL7 Integration\n\n' +
+              '## Context\n\nVisit our **[Web Portal](https://developers.dev.kms-connect.com/)** for understanding about the context\n\n' +
+              '## About\n\nAll about KMS Connect.',
             name: '',
             tags: 'CUSTOM_ARTICLE',
           },
         ],
         tocGroupMapping: [
           {
+            parent: "Patient Demographics",
+            childs: [
+              "Patient"
+            ]
+          },
+          {
             parent: "Appointment Scheduling",
             childs: [
-              "Appointment", "Binary", "Communication"
+              "Appointment", "Slot"
             ]
           },
           {
             parent: "Patient History",
             childs: [
-              "AllergyIntolerance", "Binary", "Condition"
+              "AllergyIntolerance", "Condition", "FamilyMemberHistory", "Immunization", "MedicationAdministration",
+              "MedicationStatement", "Observation", "Procedure"
             ]
-          }
+          },
+          {
+            parent: "Clinical Findings/Results",
+            childs: [
+              "DiagnosticReport", "Observation"
+            ]
+          },
+          {
+            parent: "Physician Orders",
+            childs: [
+              "MedicationRequest", "NutritionOrder", "ServiceRequest", "SupplyRequest"
+            ]
+          },
+          {
+            parent: "Provider Directory",
+            childs: [
+              "Location", "Organization", "Practitioner"
+            ]
+          },
+          {
+            parent: "Others",
+            childs: [
+              "Binary", "Communication", "DocumentReference"
+            ]
+          },
+          {
+            parent: "HL7 Integration",
+            childs: [
+              "HL7V2Integration"
+            ]
+          },
         ],
         tocPredefinedGroup: [
+          {
+            title: 'Patient Demographics',
+            items: [],
+            id: '/patient-demographics',
+            slug: '/patient-demographics',
+            type: 'article',
+            meta: '',
+          },
           {
             title: 'Appointment Scheduling',
             items: [],
@@ -134,6 +307,46 @@
             slug: '/patient-history',
             type: 'article',
             meta: '',
+          },
+          {
+            title: 'Clinical Findings/Results',
+            items: [],
+            id: '/clinical-finding-result',
+            slug: '/clinical-finding-result',
+            type: 'article',
+            meta: '',
+          },
+          {
+            title: 'Physician Orders',
+            items: [],
+            id: '/physician-orders',
+            slug: '/physician-orders',
+            type: 'article',
+            meta: '',
+          },
+          {
+            title: 'Provider Directory',
+            items: [],
+            id: '/provider-directory',
+            slug: '/provider-directory',
+            type: 'article',
+            meta: '',
+          },
+          {
+            title: 'Others',
+            items: [],
+            id: '/others-groups',
+            slug: '/others-groups',
+            type: 'article',
+            meta: '',
+          },
+          {
+            title: 'HL7 Integration',
+            items: [],
+            id: '/hl7v2',
+            slug: '/hl7v2',
+            type: 'article',
+            meta: '',
           }
         ],
       };
@@ -141,7 +354,7 @@
       function onDocumentLoad() {
         var apiDocs = document.createElement('elements-api');
 
-        apiDocs.setAttribute('apiDescriptionUrl', './api.json');
+        apiDocs.setAttribute('apiDescriptionUrl', '/api.json');
         apiDocs.setAttribute('router', 'hash');
         apiDocs.setAttribute('layout', 'sidebar');
         apiDocs.setAttribute('customConfig', JSON.stringify(customData));
@@ -151,9 +364,15 @@
 
     </script>
 
-  </head>
 
+  </head>
   <body onload="onDocumentLoad()">
-    <!-- <elements-api  id="api-docs" apiDescriptionUrl="./api.json" router="hash" layout="sidebar" /> -->
+
+<!--    <elements-api-->
+<!--      apiDescriptionUrl="/public/api.json"-->
+<!--      router="hash"-->
+<!--      layout="sidebar"-->
+<!--    />-->
+
   </body>
 </html>
